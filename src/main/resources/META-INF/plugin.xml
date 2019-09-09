@@ -1,13 +1,13 @@
 <idea-plugin>
-    <id>copypaste.copypaste</id>
+    <id>com.copypaste</id>
     <name>Copypaste</name>
-    <vendor></vendor>
+    <vendor/>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+    <module-components>
+        <component>
+            <implementation-class>com.copypaste.InitModuleComponent</implementation-class>
+        </component>
+    </module-components>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
@@ -15,10 +15,12 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="ASTMessageAction" class="ASTMessageAction" text="AST plugin"
-                description="Copy-paste plugin">
+        <action id="com.copypaste.ASTInfoMessageAction"
+                class="com.copypaste.ASTInfoMessageAction"
+                text="Build AST"
+                description="Plugin's message with AST of selected code">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt Q"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt A"/>
         </action>
     </actions>
 
