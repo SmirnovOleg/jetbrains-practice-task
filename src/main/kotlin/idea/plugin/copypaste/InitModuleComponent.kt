@@ -1,4 +1,4 @@
-package com.copypaste
+package idea.plugin.copypaste
 
 import com.intellij.openapi.actionSystem.IdeActions
 import com.intellij.openapi.editor.actionSystem.EditorActionManager
@@ -10,7 +10,6 @@ import com.intellij.openapi.module.ModuleComponent
 class InitModuleComponent: ModuleComponent {
     override fun projectOpened() {
         val actionManager = EditorActionManager.getInstance()
-        // Start handling paste events
         actionManager.setActionHandler(IdeActions.ACTION_EDITOR_PASTE, MyEditorTextInsertHandler())
     }
 }

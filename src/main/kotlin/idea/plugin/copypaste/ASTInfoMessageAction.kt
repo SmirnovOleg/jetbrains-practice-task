@@ -1,4 +1,4 @@
-package com.copypaste
+package idea.plugin.copypaste
 
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -13,26 +13,7 @@ import com.intellij.psi.tree.TokenSet
  */
 class ASTInfoMessageAction : AnAction() {
     private var message = ""
-    private val uselessNodeTypes = hashSetOf("WHITE_SPACE", "ERROR_ELEMENT")
-
-    /**
-     * Depth-first search for traversing tree of ASTNodes
-     *
-     * @param depth is used for pretty printing nested tree elements
-     */
-    private fun recursiveASTWalking(currentNode: ASTNode, depth: Int = 0) {
-        val currentNodeType = currentNode.elementType.toString()
-        // Add prefix for tree element string if necessary
-        if (!uselessNodeTypes.contains(currentNodeType)) {
-            message += '|'
-            for (i in 1..depth)
-                message += "--------"
-            message += ">$currentNodeType\n"
-        }
-        // Recursively visit other children
-        for (child in currentNode.getChildren(TokenSet.ANY))
-            recursiveASTWalking(child, depth + 1)
-    }
+    private val insignificantNodeTypes = hashSetOf("WHITE_SPACE", "ERROR_ELEMENT")
 
     override fun actionPerformed(anActionEvent: AnActionEvent) {
         // Prepare environment
@@ -51,7 +32,32 @@ class ASTInfoMessageAction : AnAction() {
         Messages.showMessageDialog(currentProject,
             message,
             "Abstract syntax tree",
-            Messages.getInformationIcon())
+            Messages.getInformationIcon()
+        )
     }
 
+    /**
+     * Depth-first search for traversing tree of ASTNodes
+     *
+     * @param current stores current node in AST
+     * @param depth is used for correct printing nested AST nodes
+     */
+    private fun recursiveASTWalking(current: ASTNode, depth: Int = 0) {
+        val currentNodeType = current.elementType.toString()
+        // Add pretty prefix if necessary
+        if (currentNodeType !in insignificantNodeTypes) {
+            message += '|' + "--------".repeat(depth) + ">$currentNodeType\n"
+        }
+        // Recursively visit children
+        var additionalDepth = 1
+        for (child in current.getChildren(TokenSet.ANY)) {
+            // Additional nesting for blocks within curly braces
+            val childNodeType = child.elementType.toString()
+            if (childNodeType == "LBRACE")
+                additionalDepth++
+            recursiveASTWalking(child, depth + additionalDepth)
+            if (childNodeType == "RBRACE")
+                additionalDepth--
+        }
+    }
 }

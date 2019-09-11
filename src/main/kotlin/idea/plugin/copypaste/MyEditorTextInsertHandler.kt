@@ -1,4 +1,4 @@
-package com.copypaste
+package idea.plugin.copypaste
 
 import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.application.ex.ClipboardUtil
@@ -21,7 +21,7 @@ class MyEditorTextInsertHandler : BasePasteHandler(), EditorTextInsertHandler {
                 "\n\nPlease make sure you really want to do this."
         val result = Messages.showYesNoDialog(message, "Warning!", Messages.getWarningIcon())
         // Check if user pressed "Yes" button
-        if (result == 0 && clipboardText != null) {
+        if (result == 0 && !clipboardText.isNullOrEmpty()) {
             super.doExecute(editor, caret, dataContext)
         }
     }

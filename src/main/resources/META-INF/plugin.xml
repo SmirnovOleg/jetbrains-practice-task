@@ -1,11 +1,11 @@
 <idea-plugin>
-    <id>com.copypaste</id>
+    <id>idea.plugin.copypaste</id>
     <name>Copypaste</name>
     <vendor/>
 
     <module-components>
         <component>
-            <implementation-class>com.copypaste.InitModuleComponent</implementation-class>
+            <implementation-class>idea.plugin.copypaste.InitModuleComponent</implementation-class>
         </component>
     </module-components>
 
@@ -15,8 +15,8 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="com.copypaste.ASTInfoMessageAction"
-                class="com.copypaste.ASTInfoMessageAction"
+        <action id="idea.plugin.copypaste.ASTInfoMessageAction"
+                class="idea.plugin.copypaste.ASTInfoMessageAction"
                 text="Build AST"
                 description="Plugin's message with AST of selected code">
             <add-to-group group-id="MainToolBar" anchor="last"/>
