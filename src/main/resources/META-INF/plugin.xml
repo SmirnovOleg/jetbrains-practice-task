@@ -19,7 +19,7 @@
                 class="com.copypaste.ASTInfoMessageAction"
                 text="Build AST"
                 description="Plugin's message with AST of selected code">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <add-to-group group-id="MainToolBar" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt A"/>
         </action>
     </actions>
