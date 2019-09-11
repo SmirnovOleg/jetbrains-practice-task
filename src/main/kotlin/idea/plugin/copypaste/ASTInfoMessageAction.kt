@@ -25,7 +25,7 @@ class ASTInfoMessageAction : AnAction() {
         val psiSelectedFile = PsiFileFactory
             .getInstance(currentProject)
             .createFileFromText(psiFile.language, selectedCode)
-        // Build AST
+        // Get abstract syntax tree
         message = ""
         recursiveASTWalking(psiSelectedFile.node)
         // Show message
@@ -37,7 +37,7 @@ class ASTInfoMessageAction : AnAction() {
     }
 
     /**
-     * Depth-first search for traversing tree of ASTNodes
+     * Recursive traversing tree of ASTNodes
      *
      * @param current stores current node in AST
      * @param depth is used for correct printing nested AST nodes

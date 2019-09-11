@@ -17,7 +17,7 @@
         <!-- Add your actions here -->
         <action id="idea.plugin.copypaste.ASTInfoMessageAction"
                 class="idea.plugin.copypaste.ASTInfoMessageAction"
-                text="Build AST"
+                text="Get AST"
                 description="Plugin's message with AST of selected code">
             <add-to-group group-id="MainToolBar" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt A"/>
